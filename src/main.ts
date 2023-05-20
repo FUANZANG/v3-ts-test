@@ -13,5 +13,10 @@ const app = createApp(App);
 app.use(ElementPlus, {
   locale: zhCn,
 });
+import globalComponent from "@/components";
+// 安装自定义插件
+app.use(globalComponent);
+// SVG插件
+import "virtual:svg-icons-register";
 // 挂载应用
 app.mount("#app");
