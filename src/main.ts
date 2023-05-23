@@ -11,7 +11,10 @@ import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 // SVG插件
 import "virtual:svg-icons-register";
 import globalComponent from "@/components";
+// 引入路由
 import router from "./router";
+// 引入仓库
+import pinia from "./store";
 // 获取应用实例对象
 const app = createApp(App);
 // 安装插件
@@ -22,5 +25,7 @@ app.use(ElementPlus, {
 app.use(globalComponent);
 // 注册路由
 app.use(router);
+// 注册仓库
+app.use(pinia);
 // 挂载应用
 app.mount("#app");
