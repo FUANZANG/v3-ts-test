@@ -3,16 +3,21 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form" :model="loginForm">
+        <el-form
+          class="login_form"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginForms"
+        >
           <h1>Hello</h1>
           <h2>欢迎</h2>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               :prefix-icon="User"
               v-model="loginForm.username"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               :prefix-icon="Lock"
               type="password"
@@ -51,7 +56,26 @@ let loginForm = reactive({
   username: "admin",
   password: "123456",
 });
+// 获取el-form组件
+let loginForms = ref();
+// 自定义校验规则
+const validatorUserName = (rule: any, value: any, callback: any) => {
+  if (value.length >= 5) {
+    callback();
+  } else {
+    callback(new Error("账号长度不小于5位"));
+  }
+};
+const validatorPassword = (rule: any, value: any, callback: any) => {
+  if (value.length >= 5) {
+    callback();
+  } else {
+    callback(new Error("密码长度不小于5位"));
+  }
+};
+// 登录按钮点击事件
 const login = async () => {
+  await loginForms.value.validate();
   loading.value = true;
   try {
     // 保证登录成功进行
@@ -72,6 +96,27 @@ const login = async () => {
       message: (e as Error).message || "登录失败",
     });
   }
+};
+const rules = {
+  username: [
+    // {
+    //   required: true,
+    //   min: 6,
+    //   max: 10,
+    //   message: "账号长度在6-10位之间",
+    //   trigger: "blur",
+    // },
+    { trigger: ["blur", "change"], validator: validatorUserName },
+  ],
+  password: [
+    // {
+    //   required: true,
+    //   min: 6,
+    //   max: 15,
+    //   message: "密码长度在6-15位之间",
+    // },
+    { trigger: ["blur", "change"], validator: validatorPassword },
+  ],
 };
 </script>
 
