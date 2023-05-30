@@ -7,12 +7,18 @@ export const constantRoute = [
     meta: {
       title: "登录",
       hidden: true,
+      icon: "Promotion", //菜单文字左侧的图标,支持element-plus全部图标
     },
   },
   {
     path: "/",
     component: () => import("@/layout/index.vue"),
     name: "layout", //
+    meta: {
+      title: "",
+      hidden: false,
+      icon: "",
+    },
     children: [
       {
         path: "/home",
@@ -20,6 +26,7 @@ export const constantRoute = [
         meta: {
           title: "首页",
           hidden: false,
+          icon: "HomeFilled",
         },
       },
     ],
@@ -31,6 +38,7 @@ export const constantRoute = [
     meta: {
       title: "404",
       hidden: true,
+      icon: "DocumentDelete",
     },
   },
   {
@@ -40,6 +48,7 @@ export const constantRoute = [
     meta: {
       title: "任意路由",
       hidden: true,
+      icon: "DataLine",
     },
   },
 ];
