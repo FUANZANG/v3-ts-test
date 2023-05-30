@@ -7,11 +7,14 @@ import type { loginFormType, loginResponseData } from "@/api/user/type";
 import type { UserState } from "./types/types";
 // 引入操作本地存储的工具
 import { SET_TOKEN, GET_TOKEN } from "@/utils/token";
+// 引入常量路由
+import { constantRoute } from "@/router/routes";
 const useUserStore = defineStore("User", {
   // 小仓库存数据的地方
   state: (): UserState => {
     return {
       token: GET_TOKEN(), // 用户标识
+      menuRoutes: constantRoute, // 仓库存储生成菜单的数组(路由)
     };
   },
   // 异步 逻辑的地方
