@@ -5,28 +5,42 @@
       <Logo></Logo>
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
-        <!-- 菜单 -->
-        <el-menu>
+        <!-- 菜单 开启router后跳转为index绑定的路径 -->
+        <!-- <el-menu background-color="#001529" text-color="#fff" router> -->
+        <el-menu
+          :default-active="$route.path"
+          background-color="#001529"
+          text-color="#fff"
+        >
           <!-- 根据路由动态生成菜单 -->
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
       </el-scrollbar>
     </div>
     <!-- 顶部导航 -->
-    <div class="layout_tabbar"></div>
+    <div class="layout_tabbar">
+      <TabBar></TabBar>
+    </div>
     <!-- 内容展示区域 -->
-    <div class="layout_main"></div>
+    <div class="layout_main">
+      <Main></Main>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+// 获取路由对象
+import { useRoute } from "vue-router";
 // 引入左侧菜单logo子组件
 import Logo from "./logo/index.vue";
 // 引入菜单组件
 import Menu from "./menu/index.vue";
+// 右侧内容展示区域
+import Main from "./main/index.vue";
 // 获取用户相关的小仓库
 import useUserStore from "@/store/modules/user";
 let userStore = useUserStore();
+let $route = useRoute();
 </script>
 
 <style scoped lang="scss">
