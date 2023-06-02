@@ -1,13 +1,17 @@
 <template>
   <div class="layout_container">
     <!-- 左侧菜单 -->
-    <div class="layout_slider">
+    <div
+      class="layout_slider"
+      :class="{ fold: layoutSettingStore.fold ? true : false }"
+    >
       <Logo></Logo>
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单 开启router后跳转为index绑定的路径 -->
         <!-- <el-menu background-color="#001529" text-color="#fff" router> -->
         <el-menu
+          :collapse="layoutSettingStore.fold ? true : false"
           :default-active="$route.path"
           background-color="#001529"
           text-color="#fff"
@@ -18,11 +22,17 @@
       </el-scrollbar>
     </div>
     <!-- 顶部导航 -->
-    <div class="layout_tabbar">
+    <div
+      class="layout_tabbar"
+      :class="{ fold: layoutSettingStore.fold ? true : false }"
+    >
       <TabBar></TabBar>
     </div>
     <!-- 内容展示区域 -->
-    <div class="layout_main">
+    <div
+      class="layout_main"
+      :class="{ fold: layoutSettingStore.fold ? true : false }"
+    >
       <Main></Main>
     </div>
   </div>
@@ -37,10 +47,21 @@ import Logo from "./logo/index.vue";
 import Menu from "./menu/index.vue";
 // 右侧内容展示区域
 import Main from "./main/index.vue";
+// 引入顶部tabBar组件
+import TabBar from "./tabbar/index.vue";
 // 获取用户相关的小仓库
 import useUserStore from "@/store/modules/user";
+// 获取layout配置仓库
+import useLayoutSettingStore from "@/store/modules/setting";
 let userStore = useUserStore();
+let layoutSettingStore = useLayoutSettingStore();
 let $route = useRoute();
+</script>
+
+<script lang="ts">
+export default {
+  name: "Layout",
+};
 </script>
 
 <style scoped lang="scss">
@@ -62,6 +83,9 @@ let $route = useRoute();
       .el-menu {
         border-right: none;
       }
+    }
+    &.fold {
+      width: $base-menu-min-width;
     }
   }
 
