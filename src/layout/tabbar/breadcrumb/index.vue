@@ -5,8 +5,17 @@
   </el-icon>
   <!-- 面包屑 -->
   <el-breadcrumb separator-icon="ArrowRight">
-    <el-breadcrumb-item>xxx</el-breadcrumb-item>
-    <el-breadcrumb-item>xxx</el-breadcrumb-item>
+    <el-breadcrumb-item
+      v-for="(item, index) in $route.matched"
+      :key="index"
+      :to="item.path"
+      v-show="item.meta.title"
+    >
+      <el-icon>
+        <component :is="item.meta.icon"></component>
+      </el-icon>
+      <span>{{ item.meta.title }}</span>
+    </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
