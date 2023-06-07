@@ -5,7 +5,12 @@
     circle
     @click="updateRefresh"
   ></el-button>
-  <el-button size="small" icon="FullScreen" circle></el-button>
+  <el-button
+    size="small"
+    icon="FullScreen"
+    circle
+    @click="fullScreen"
+  ></el-button>
   <img src="" alt="" />
   <!-- 下拉菜单 -->
   <el-dropdown>
@@ -28,6 +33,16 @@ import useLayoutSettingStore from "@/store/modules/setting";
 let layoutSettingStore = useLayoutSettingStore();
 const updateRefresh = () => {
   layoutSettingStore.refresh = !layoutSettingStore.refresh;
+};
+const fullScreen = () => {
+  // DOM 对象的属性可以判断当前是否为全屏模式：true:全屏/false:非全屏
+  let full = document.fullscreenElement;
+  // requestFullscreen/exitFullscreen文档根节点的方法
+  if (!full) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
 };
 </script>
 
