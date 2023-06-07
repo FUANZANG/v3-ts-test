@@ -43,7 +43,7 @@
 <script setup lang="ts">
 import { User, Lock } from "@element-plus/icons-vue";
 import { reactive, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { ElNotification } from "element-plus";
 import { getTime } from "@/utils/time";
 // 引入用户相关的小仓库
@@ -51,6 +51,7 @@ import useUserStore from "@/store/modules/user";
 let userStore = useUserStore();
 // 获取路由
 let $router = useRouter();
+let $route = useRoute();
 let loading = ref(false);
 let loginForm = reactive({
   username: "admin",
@@ -81,7 +82,9 @@ const login = async () => {
     // 保证登录成功进行
     await userStore.userLogin(loginForm);
     // 编程式导航跳转到首页
-    $router.push("/");
+    // 判断是否有query参数
+    let redirect: any = $route.query.redirect;
+    $router.push({ path: redirect || "/" });
     // 成功提示
     ElNotification({
       type: "success",
