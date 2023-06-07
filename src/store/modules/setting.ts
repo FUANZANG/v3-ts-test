@@ -4,7 +4,8 @@ import { defineStore } from "pinia";
 const useLayoutSettingStore = defineStore("SettingStore", {
   state: () => {
     return {
-      fold: false, /// 菜单折叠
+      fold: false, // 菜单折叠
+      refresh: false, // tabBar刷新
     };
   },
 });
