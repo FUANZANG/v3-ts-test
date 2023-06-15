@@ -12,7 +12,7 @@
       v-show="item.meta.title"
     >
       <el-icon>
-        <component :is="item.meta.icon"></component>
+        <component v-if="item.meta.icon" :is="item.meta.icon"></component>
       </el-icon>
       <span>{{ item.meta.title }}</span>
     </el-breadcrumb-item>
