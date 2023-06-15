@@ -1,27 +1,29 @@
 <template>
-  <el-card>
-    <div class="box">
-      <img :src="userStore.avatar" alt="" class="avatar" />
-      <div class="bottom">
-        <h3 class="title">{{ getTime() }}好呀{{ userStore.username }}</h3>
-        <p class="subtitle">A test program for vue3-typescript-vite-admin</p>
+  <div>
+    <el-card>
+      <div class="box">
+        <img :src="userStore.avatar" alt="" class="avatar" />
+        <div class="bottom">
+          <h3 class="title">{{ getTime() }}好呀{{ userStore.username }}</h3>
+          <p class="subtitle">A test program for vue3-typescript-vite-admin</p>
+        </div>
       </div>
+    </el-card>
+    <div class="bottoms">
+      <svg-icon name="welcome" width="600px" height="300px"></svg-icon>
     </div>
-  </el-card>
-  <div class="bottoms">
-    <svg-icon name="welcome" width="600px" height="300px"></svg-icon>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getTime } from "@/utils/time";
-import { onMounted } from "vue";
+// import { onMounted } from "vue";
 import useUserStore from "@/store/modules/user";
 let userStore = useUserStore();
 
-onMounted(() => {
-  userStore.userInfo();
-});
+// onMounted(() => {
+//   userStore.userInfo();
+// });
 </script>
 
 <style lang="scss" scoped>

@@ -38,8 +38,10 @@ const useUserStore = defineStore("User", {
       if (result.code == 200) {
         this.username = result.data.checkUser.username;
         this.avatar = result.data.checkUser.avatar;
+        return "ok";
+      } else {
+        return Promise.reject("获取用户信息失败");
       }
-      console.log(result);
     },
     // 退出登录
     userLogout() {
